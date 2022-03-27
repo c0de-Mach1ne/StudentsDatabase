@@ -6,6 +6,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.widget.Toast
 
 class DBHelper(
     context: Context?,
@@ -34,7 +35,20 @@ class DBHelper(
 
     fun getAllStudents(): Cursor?{
         val db = this.readableDatabase
-        return db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+        var cursor: Cursor? = null
+        if (db != null ) {
+            cursor = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+        }
+        return cursor
+    }
+
+    fun getAllGroups(): Cursor?{
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+        if (db != null ) {
+            cursor = db.rawQuery("SELECT * FROM $gTABLE_NAME", null)
+        }
+        return cursor
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
