@@ -3,6 +3,7 @@ package com.example.sqllitedbstevzdasant2
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
@@ -31,10 +32,26 @@ class DBHelper(
         db?.execSQL(queryGroup)
     }
 
+    fun getAllStudents(): Cursor?{
+        val db = this.readableDatabase
+        return db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+    }
+
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
+
+    fun deleteStudentsData(){
+        val db: SQLiteDatabase = this.writableDatabase
+        db.execSQL("DELETE FROM $TABLE_NAME")
+    }
+
+    fun deleteGroupData(){
+        val db: SQLiteDatabase = this.writableDatabase
+        db.execSQL("DELETE FROM $gTABLE_NAME")
+    }
+
 
     fun addStudent(
         ticket: String, name: String, secondName:
