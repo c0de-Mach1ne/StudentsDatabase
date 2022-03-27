@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">SQLlite DB StevzdaSan t2</string>
+    <string name="no_data">No Data</string>
+    <string name="group">Group</string>
+    <string name="student_ticket">Student ticket</string>
+    <string name="patronymic">Patronymic</string>
+    <string name="name">Name</string>
+    <string name="second_name">Second name</string>
+    <string name="add_students">Add students</string>
+    <string name="group_name">Group name</string>
+    <string name="add_group">Add group</string>
+    <string name="numbers_of_students">Numbers of students</string>
+    <string name="group_id">Group ID</string>
+    <string name="number_of_students">Number of students</string>
+    <string name="faculty">Faculty</string>
+    <string name="training_profile">Training profile</string>
+    <string name="group_leader">Group leader</string>
+    <string name="add_student">Add student</string>
+</resources>
