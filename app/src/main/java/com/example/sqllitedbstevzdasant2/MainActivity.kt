@@ -2,10 +2,8 @@ package com.example.sqllitedbstevzdasant2
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.example.sqllitedbstevzdasant2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -19,8 +17,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val db = DBHelper(this, null)
+
         binding.addButton.setOnClickListener {
-            val intent: Intent = Intent(this, AddStudentAndGroup::class.java)
+            val intent = Intent(this, AddActivity::class.java)
             startActivity(intent)
         }
 
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnDisplayStudents.setOnClickListener {
             binding.tvDisplayData.text = ""
 
-            val db = DBHelper(this, null)
+
             var cursor = db.getAllStudents()
 
             if (cursor?.count != 0) {
@@ -47,11 +47,6 @@ class MainActivity : AppCompatActivity() {
                     binding.tvDisplayData.append(cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_PATRONYMIC)) + " ")
                     binding.tvDisplayData.append(cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_TICKET)) + " ")
                     binding.tvDisplayData.append(cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_GROUP)) + " ")
-//                    binding.tvDisplayData.append("Second name: " + cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_SECOND_NAME)) + " ")
-//                    binding.tvDisplayData.append("Name: " + cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_NAME)) + " ")
-//                    binding.tvDisplayData.append("Patronymic: " + cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_PATRONYMIC)) + " ")
-//                    binding.tvDisplayData.append("Students ticket: " + cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_TICKET)) + " ")
-//                    binding.tvDisplayData.append("Group name: " + cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_GROUP)) + " ")
                     binding.tvDisplayData.append("\n")
                 }
             }
@@ -82,13 +77,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnDeleteGroup.setOnClickListener {
-            val db = DBHelper(this, null)
-            db.deleteGroupData()
+            db.deleteGroups()
         }
 
         binding.btnDeleteStudents.setOnClickListener {
-            val db = DBHelper(this, null)
-            db.deleteStudentsData()
+            db.deleteStudents()
+        }
+
+        binding.btnDeleteOneGroup.setOnClickListener{
+            val ticketStudentForDelete = binding.edDeleteOneRow.text.toString()
+            db.deleteOneStudent(ticketStudentForDelete)
+
+            binding.edDeleteOneRow.text.clear()
         }
     }
 }

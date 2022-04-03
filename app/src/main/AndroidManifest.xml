@@ -13,7 +13,7 @@
             android:name=".MainActivity2"
             android:exported="false" />
         <activity
-            android:name=".AddStudentAndGroup"
+            android:name=".AddActivity"
             android:exported="false"
             android:label="Add" />
         <activity

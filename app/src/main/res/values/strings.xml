@@ -17,4 +17,7 @@
     <string name="group_leader">Group leader</string>
     <string name="add_student">Add student</string>
     <string name="students">Students</string>
+    <string name="display_all_data">Display all data</string>
+    <string name="enter_id_group">Enter ID group</string>
+    <string name="enter_student_ticket">Enter student ticket</string>
 </resources>

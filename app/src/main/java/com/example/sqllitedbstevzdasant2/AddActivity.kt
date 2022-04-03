@@ -2,13 +2,13 @@ package com.example.sqllitedbstevzdasant2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.sqllitedbstevzdasant2.databinding.ActivityAddStudentAndGroupBinding
+import com.example.sqllitedbstevzdasant2.databinding.ActivityAddBinding
 
-class AddStudentAndGroup : AppCompatActivity() {
-    private lateinit var binding: ActivityAddStudentAndGroupBinding
+class AddActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAddBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddStudentAndGroupBinding.inflate(layoutInflater)
+        binding = ActivityAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnAddStudent.setOnClickListener {

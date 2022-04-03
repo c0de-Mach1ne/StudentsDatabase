@@ -56,15 +56,28 @@ class DBHelper(
         onCreate(db)
     }
 
-    fun deleteStudentsData(){
-        val db: SQLiteDatabase = this.writableDatabase
+    fun deleteStudents(){
+        val db = this.writableDatabase
         db.execSQL("DELETE FROM $TABLE_NAME")
+
+        db.close()
     }
 
-    fun deleteGroupData(){
-        val db: SQLiteDatabase = this.writableDatabase
+    fun deleteGroups(){
+        val db = this.writableDatabase
         db.execSQL("DELETE FROM $gTABLE_NAME")
+
+        db.close()
     }
+
+//    fun displayStudentsWithGroupName(groupName: String): Cursor?{
+//        val db = this.readableDatabase
+//        var cursor: Cursor? = null
+//        if (db != null ) {
+//            cursor = db.rawQuery("SELECT $TABLE_NAME.*,  $gTABLE_NAME.* FROM ", null)
+//        }
+//        return cursor
+//    }
 
 
     fun addStudent(
@@ -74,11 +87,11 @@ class DBHelper(
 
         val values = ContentValues()
         values.apply {
-            values.put(COLUMN_NAME, name)
-            values.put(COLUMN_SECOND_NAME, secondName)
-            values.put(COLUMN_PATRONYMIC, patronymic)
-            values.put(COLUMN_GROUP, studentGroup)
-            values.put(COLUMN_TICKET, ticket)
+            put(COLUMN_NAME, name)
+            put(COLUMN_SECOND_NAME, secondName)
+            put(COLUMN_PATRONYMIC, patronymic)
+            put(COLUMN_GROUP, studentGroup)
+            put(COLUMN_TICKET, ticket)
         }
 
         val db = this.writableDatabase
@@ -93,16 +106,23 @@ class DBHelper(
     ) {
         val values = ContentValues()
         values.apply {
-            values.put(gCOLUMN_ID, id)
-            values.put(gCOLUMN_FACULTY, faculty)
-            values.put(gCOLUMN_GROUP_LEADER, groupLeader)
-            values.put(gCOLUMN_NUMBER_OF_STUDENTS, numberOfStudent)
-            values.put(gCOLUMN_TRAINING_PROFILE, trainingProfile)
-            values.put(gCOLUMN_GROUP_NUMBER, groupNumber)
+            put(gCOLUMN_ID, id)
+            put(gCOLUMN_FACULTY, faculty)
+            put(gCOLUMN_GROUP_LEADER, groupLeader)
+            put(gCOLUMN_NUMBER_OF_STUDENTS, numberOfStudent)
+            put(gCOLUMN_TRAINING_PROFILE, trainingProfile)
+            put(gCOLUMN_GROUP_NUMBER, groupNumber)
         }
 
         val db = this.writableDatabase
         db.insert(gTABLE_NAME, null, values)
+
+        db.close()
+    }
+
+    fun deleteOneStudent(ticket: String){
+        val db = this.writableDatabase
+        db.execSQL("DELETE FROM $TABLE_NAME WHERE $COLUMN_TICKET = '$ticket'"  )
 
         db.close()
     }
